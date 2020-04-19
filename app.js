@@ -1,6 +1,7 @@
 const cursor  = document.querySelector('#cursor');
 const navItems = document.querySelectorAll('.navItem');
 const img = document.querySelector('img');
+const footerApplications = document.querySelectorAll('.application');
 
 document.addEventListener('mouseover', e => {
     if (cursor.hasAttribute('hidden')){
@@ -26,8 +27,17 @@ document.addEventListener('mouseout',() => {
 
 const addMovingEffect = (element,maxMove,cb,outCB) => {
     element.addEventListener('mousemove',(e) => {
-        let changeX = e.pageX - (element.clientWidth/2).toFixed() - element.offsetLeft;
-        let changeY = e.pageY - (element.clientHeight/2).toFixed() - element.offsetTop;
+        let changeX,changeY;
+        // here it checks for the position type of the parent because the (element.offsetLeft) depends on the
+        // parent of the element position style
+        const parentPositionType = getComputedStyle(element.parentNode).position;
+        if (parentPositionType === 'absolute') {
+            changeX = e.pageX - (element.clientWidth/2).toFixed() - element.offsetLeft - element.parentNode.offsetLeft;
+            changeY = e.pageY - (element.clientHeight/2).toFixed() - element.offsetTop - element.parentNode.offsetTop;
+        } else {
+            changeX = e.pageX - (element.clientWidth/2).toFixed() - element.offsetLeft;
+            changeY = e.pageY - (element.clientHeight/2).toFixed() - element.offsetTop;
+        }
 
         element.style.left = changeX > maxMove || changeX < -maxMove ? '0px' : changeX + 'px';
         element.style.top = changeY > maxMove || changeY < -maxMove ? '0px' : changeY + 'px';
@@ -60,3 +70,7 @@ const addMovingEffect = (element,maxMove,cb,outCB) => {
 navItems.forEach(item => {
     addMovingEffect(item,20);
 });
+
+footerApplications.forEach(application => {
+    addMovingEffect(application,60);
+})

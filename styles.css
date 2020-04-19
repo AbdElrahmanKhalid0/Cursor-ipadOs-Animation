@@ -1,7 +1,14 @@
+* {
+    margin: 0;
+}
+
 body {
     margin: 0;
     height: 100vh;
     cursor: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 nav{
@@ -52,4 +59,38 @@ img {
 .navItem:hover {
     transform: scale(1.1);
     background-color: rgb(121, 121, 121, .5);
+}
+
+
+.applications{
+    list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    bottom: 0;
+    width: 80%;
+    height: 50px;
+    background-color: rgba(201, 201, 201, 0.603);
+    margin: 0 auto;
+    position: absolute;
+    left: 10%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+}
+
+.application {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(255, 95, 122);
+    margin-top: 5px;
+    border-radius: 10%;
+    transition: .1s;
+    position: relative;
+}
+
+.application:hover {
+    transform: scale(1.1);
+    background-color: rgb(255, 134, 154);
 }
